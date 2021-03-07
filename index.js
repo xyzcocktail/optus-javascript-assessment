@@ -144,6 +144,10 @@ const createBroadcastEndTime = (asset) => {
     startTime.setTime(startTime.getTime() + asset.duration);
     asset.broadcastEndTime = startTime;
   }
+  return asset;
+};
+
+const updateImageURL = (asset) => {
   /* 4. replace image.domain1.com/cms to cms.domain2.com for all image url */
   const pattern = /image.domain1.com\/cms/g;
   const replaceWith = 'cms.domain2.com';
@@ -155,6 +159,7 @@ resultOutput = exampleInputAssetList
   .filter((asset) => { return mandatoryFields.every((mkey) => { return Object.keys(asset).includes(mkey); }); })
   .map((asset) => { return mandatoryFilters(asset, mandatoryFields, optionalFields) })
   .map((asset) => { return createBroadcastEndTime(asset) })
+  .map((asset) => { return updateImageURL(asset) })
   /* 5. sort the output asset list by broadcastStartTime */
   .sort((a, b) => { return new Date(b.broadcastStartTime) - new Date(a.broadcastStartTime); });
 
