@@ -139,10 +139,11 @@ const mandatoryFilters = (item, mandatory, options) => {
 const createBroadcastEndTime = (asset) => {
   /* 3. create broadcastEndTime for each of the asset. It's value should be broadcastStartTime + duration in ISO8601 format
       (same format as broadcastStartTime) */
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
   if (asset && asset.broadcastStartTime && asset.duration) {
     let startTime = new Date(asset.broadcastStartTime);
-    startTime.setTime(startTime.getTime() + asset.duration);
-    asset.broadcastEndTime = startTime;
+    startTime.setTime(startTime.getTime() + (asset.duration * 1000));
+    asset.broadcastEndTime = startTime.toISOString();
   }
   return asset;
 };
