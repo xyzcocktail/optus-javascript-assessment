@@ -162,7 +162,7 @@ resultOutput = exampleInputAssetList
   .map((asset) => { return createBroadcastEndTime(asset) })
   .map((asset) => { return updateImageURL(asset) })
   /* 5. sort the output asset list by broadcastStartTime */
-  .sort((a, b) => { return new Date(b.broadcastStartTime) - new Date(a.broadcastStartTime); });
+  .sort((a, b) => { return new Date(a.broadcastStartTime) - new Date(b.broadcastStartTime); });
 
 console.info( resultOutput );
 
